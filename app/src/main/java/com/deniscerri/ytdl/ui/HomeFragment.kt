@@ -198,6 +198,7 @@ class HomeFragment : Fragment(), HomeAdapter.OnItemClickListener, SearchSuggesti
         searchSuggestionsRecyclerView?.layoutManager = LinearLayoutManager(context)
         searchSuggestionsRecyclerView?.adapter = searchSuggestionsAdapter
         searchSuggestionsRecyclerView?.itemAnimator = null
+        searchSuggestionsRecyclerView?.isNestedScrollingEnabled = false
 
         val progressBar = view.findViewById<View>(R.id.progress)
 
@@ -284,6 +285,8 @@ class HomeFragment : Fragment(), HomeAdapter.OnItemClickListener, SearchSuggesti
                 mainActivity?.hideBottomNavigation()
             }else if (newState == SearchView.TransitionState.HIDING){
                 mainActivity?.showBottomNavigation()
+            } else if (newState == SearchView.TransitionState.HIDDEN) {
+                appBarLayout?.setExpanded(true, true)
             }
         }
 

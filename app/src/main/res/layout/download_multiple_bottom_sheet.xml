@@ -125,6 +125,7 @@
             <Button
                 android:id="@+id/bottomsheet_download_button"
                 style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:backgroundTint="?colorSecondaryContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
@@ -174,6 +175,7 @@
             <Button
                 android:id="@+id/bottomsheet_ok_button"
                 style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:backgroundTint="?colorSecondaryContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autoLink="all"

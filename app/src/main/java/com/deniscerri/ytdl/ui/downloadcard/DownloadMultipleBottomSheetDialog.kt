@@ -1335,12 +1335,14 @@ class DownloadMultipleBottomSheetDialog : BottomSheetDialogFragment(), Configure
             val haveSameContainer = downloadViewModel.checkIfAllProcessingItemsHaveSameContainer(listAdapter.getCheckedItemsOrNull())
 
             withContext(Dispatchers.Main) {
-                if (haveSameContainer.first && item != null) {
-                    setContainerText(item.container)
-                }else {
-                    setContainerText("")
+                if (isAdded) {
+                    if (haveSameContainer.first && item != null) {
+                        setContainerText(item.container)
+                    }else {
+                        setContainerText("")
+                    }
+                    containerBtn.isVisible = haveSameContainer.first && haveSameType.first && haveSameType.second != DownloadType.command
                 }
-                containerBtn.isVisible = haveSameContainer.first && haveSameType.first && haveSameType.second != DownloadType.command
             }
         }
     }

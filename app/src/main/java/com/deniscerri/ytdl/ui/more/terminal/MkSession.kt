@@ -175,6 +175,9 @@ object MkSession {
 
             val currentSystemPath = System.getenv("PATH") ?: "/system/bin"
             runtimeVariables["PATH"] = currentSystemPath
+            // REMOVE LD_LIBRARY_PATH from global shell environment
+            // This prevents system binaries (/system/bin/ls, sh, etc.) from loading custom app libraries.
+            runtimeVariables.remove("LD_LIBRARY_PATH")
             envVariables.putAll(runtimeVariables)
 
             val localDir = localDir()

@@ -239,6 +239,7 @@
 
             <Button
                 style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:backgroundTint="?colorSecondaryContainer"
                 android:id="@+id/bottomsheet_open_file_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -252,6 +253,7 @@
             <Button
                 android:id="@+id/bottomsheet_redownload_button"
                 style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:backgroundTint="?colorSecondaryContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
