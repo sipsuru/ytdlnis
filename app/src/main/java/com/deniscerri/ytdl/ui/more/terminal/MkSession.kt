@@ -98,52 +98,32 @@ object MkSession {
 
             executables.forEach { (name, file) ->
                 if (file.exists()) {
-                    val execCommand = if (file.name.endsWith(".so")) {
-                        "$linker \"${file.absolutePath}\""
-                    } else {
-                        "\"${file.absolutePath}\""
-                    }
+                    val execCommand = "\"${file.absolutePath}\""
                     rcBuilder.append(shellFunction(name, execCommand))
                 }
             }
 
             val pythonBin = runtimeManager.pythonLocation.executable
-            val pythonExec = if (pythonBin.name.endsWith(".so")) {
-                "$linker \"${pythonBin.absolutePath}\""
-            } else {
-                "\"${pythonBin.absolutePath}\""
-            }
 
             rcBuilder.append(
                 shellFunction(
                     "pip",
-                    "$pythonExec -m pip"
+                    "python -m pip"
                 )
             )
 
             val nodeBin = runtimeManager.nodeLocation.executable
             if (nodeBin.exists()) {
-                val nodeExec = if (nodeBin.name.endsWith(".so")) {
-                    "$linker \"${nodeBin.absolutePath}\""
-                } else {
-                    "\"${nodeBin.absolutePath}\""
-                }
-
                 rcBuilder.append(
                     shellFunction(
                         "npm",
-                        "$nodeExec ${$$"$NPM_CLI_PATH"}"
+                        "node ${$$"$NPM_CLI_PATH"}"
                     )
                 )
             }
 
             val ytdlpBin = runtimeManager.ytdlpPath
             if (pythonBin.exists() && ytdlpBin != null && ytdlpBin.exists()) {
-                val pythonExec = if (pythonBin.name.endsWith(".so")) {
-                    "$linker \"${pythonBin.absolutePath}\""
-                } else {
-                    "\"${pythonBin.absolutePath}\""
-                }
 
                 val ytdlpExtraArgs = StringBuilder()
                 if (runtimeManager.ffmpegLocation.isAvailable) {
@@ -168,7 +148,7 @@ object MkSession {
                 rcBuilder.append(
                     shellFunction(
                         "yt-dlp",
-                        "$pythonExec \"${ytdlpBin.absolutePath}\"$ytdlpExtraArgs"
+                        "python \"${ytdlpBin.absolutePath}\"$ytdlpExtraArgs"
                     )
                 )
             }
