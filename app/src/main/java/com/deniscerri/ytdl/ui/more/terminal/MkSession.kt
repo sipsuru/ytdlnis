@@ -53,15 +53,17 @@ object MkSession {
             fun shellFunction(name: String, commandToExec: String): String {
                 return """
                     |$name() {
-                    |    LD_LIBRARY_PATH="$ldPath" \
-                    |    PYTHONHOME="$pythonHome" \
-                    |    SSL_CERT_FILE="$sslCert" \
-                    |    OPENSSL_CONF="$openSslConf" \
-                    |    $commandToExec "${'$'}@"
+                    |    (
+                    |        export LD_LIBRARY_PATH="$ldPath"
+                    |        export PYTHONHOME="$pythonHome"
+                    |        export SSL_CERT_FILE="$sslCert"
+                    |        export OPENSSL_CONF="$openSslConf"
+                    |        exec $commandToExec "${'$'}@"
+                    |    )
                     |}
                     |
                 """.trimMargin()
-            }
+                        }
 
             val rcBuilder = StringBuilder()
 
